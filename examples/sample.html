@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sample Document</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'neutral' });</script>
+<style>
+@page { margin: 0; }
+body { max-width: 210mm; margin: 0 auto; padding: 14mm; font-family: 'Segoe UI', sans-serif; color: #1a1a2e; }
+h1 { color: #0f0c29; border-bottom: 2px solid #e94560; padding-bottom: 8px; }
+h2 { color: #1a1a2e; margin-top: 24px; page-break-after: avoid; }
+.section { page-break-before: always; }
+.block { page-break-inside: avoid; }
+.note { background: #f8f9fa; border-left: 3px solid #e94560; padding: 12px; margin: 16px 0; }
+</style>
+</head>
+<body>
+
+<h1>Sample Report</h1>
+<p>This is a sample document demonstrating the html-to-pdf-pipeline features.</p>
+
+<div class="note">
+    <strong>Note:</strong> This PDF was generated with <code>python html_to_pdf.py examples/sample.html</code>
+</div>
+
+<h2>Section 1 — Text Content</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. The CSS controls all layout — page breaks, margins, typography. Playwright just captures what the browser renders.</p>
+
+<div class="block">
+    <h2>Section 2 — Mermaid Diagram</h2>
+    <p>Mermaid.js diagrams render automatically:</p>
+    <div class="mermaid">
+        flowchart TD
+            A[HTML File] --> B[Playwright Opens in Chromium]
+            B --> C{Mermaid.js?}
+            C -->|Yes| D[Wait 3s for Rendering]
+            C -->|No| E[Capture Immediately]
+            D --> F[Generate PDF]
+            E --> F
+            F --> G[Pixel-Perfect Output]
+    </div>
+</div>
+
+<div class="section">
+    <h2>Section 3 — Page Break</h2>
+    <p>This section starts on a new page thanks to <code>page-break-before: always</code>.</p>
+    
+    <div class="block">
+        <h3>Kept Together</h3>
+        <p>This heading and paragraph stay together on the same page thanks to <code>page-break-inside: avoid</code> on the wrapper div.</p>
+    </div>
+</div>
+
+</body>
+</html>
